@@ -1,0 +1,92 @@
+:root {
+  color-scheme: dark;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  padding: 4px;
+}
+
+#overlay {
+  width: 100%;
+  min-width: 170px;
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+#lights {
+  display: grid;
+  grid-template-columns: repeat(var(--led-count, 10), minmax(8px, 1fr));
+  align-items: center;
+  gap: clamp(3px, 1.25vw, 10px);
+  width: 100%;
+  padding: clamp(5px, 1.6vw, 12px);
+  border-radius: 999px;
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.led {
+  width: 100%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  background: rgba(28, 32, 39, 0.78);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.65);
+}
+
+.led.on {
+  border-color: color-mix(in srgb, var(--led-color) 74%, white 26%);
+  background: var(--led-color);
+  box-shadow:
+    0 0 clamp(5px, 1.5vw, 12px) var(--led-color),
+    0 0 clamp(9px, 2.8vw, 24px) color-mix(in srgb, var(--led-color) 62%, transparent),
+    inset 0 0 4px rgba(255, 255, 255, 0.72);
+}
+
+#status {
+  margin-top: 5px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: clamp(9px, 2.5vw, 14px);
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-align: center;
+}
+
+#status:empty {
+  display: none;
+}
+
+#debug {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 5px 8px 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: clamp(8px, 2vw, 11px);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+#debug[hidden] {
+  display: none;
+}

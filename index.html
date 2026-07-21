@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>iRacing ShiftLines</title>
+    <base href="/ShiftLines/" />
+    <link rel="stylesheet" href="./styles.css?v=3" />
+    <style>
+      html, body, #overlay, #lights {
+        background: transparent !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <main id="overlay" aria-label="Car-specific shift lights">
+      <section id="lights" aria-live="off"></section>
+      <aside id="status">WAITING FOR KAPPS</aside>
+      <aside id="debug" hidden>
+        <span id="debug-car">NO CAR</span>
+        <span id="debug-telemetry">0 RPM · N</span>
+        <span id="debug-source">NO PROFILE</span>
+      </aside>
+    </main>
+    <script type="module" src="./src/app.js"></script>
+  </body>
+</html>
