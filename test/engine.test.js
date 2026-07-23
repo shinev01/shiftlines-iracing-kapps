@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
+  computeLedGeometry,
   computeLights,
   gearKey,
   normalizeColor,
@@ -62,3 +63,14 @@ test("falls back to iRacing shift thresholds without a profile", () => {
   assert.ok(state.lights.some((light) => !light.active));
 });
 
+test("scales the whole light bar proportionally to either window dimension", () => {
+  const wide = computeLedGeometry(1000, 40, 10);
+  const tall = computeLedGeometry(200, 400, 10);
+  const doubled = computeLedGeometry(400, 800, 10);
+
+  assert.ok(wide.diameter < 40);
+  assert.ok(tall.diameter < wide.diameter);
+  assert.equal(doubled.diameter, tall.diameter * 2);
+  assert.equal(doubled.gap, tall.gap * 2);
+  assert.equal(doubled.padding, tall.padding * 2);
+});

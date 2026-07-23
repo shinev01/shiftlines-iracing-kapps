@@ -102,3 +102,20 @@ export function playerCarPath(driverInfo) {
   return driver?.CarPath || driverInfo.DriverCarPath || "";
 }
 
+export function computeLedGeometry(width, height, count) {
+  const safeCount = Math.max(1, Math.trunc(Number(count) || 1));
+  const gapRatio = 0.22;
+  const paddingRatio = 0.28;
+  const widthUnits = safeCount + gapRatio * (safeCount - 1) + paddingRatio * 2;
+  const heightUnits = 1 + paddingRatio * 2;
+  const diameter = Math.max(2, Math.min(
+    Math.max(0, Number(width) || 0) / widthUnits,
+    Math.max(0, Number(height) || 0) / heightUnits,
+  ));
+
+  return {
+    diameter,
+    gap: diameter * gapRatio,
+    padding: diameter * paddingRatio,
+  };
+}

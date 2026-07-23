@@ -45,6 +45,14 @@ source. If a car does not yet exist in the bundled database, ShiftLines falls
 back to iRacing's `PlayerCarSLFirstRPM`, `PlayerCarSLShiftRPM`,
 `PlayerCarSLLastRPM`, and `PlayerCarSLBlinkRPM` values.
 
+The LED bar scales proportionally to the largest size that fits the current
+Kapps layer bounds. Resize the layer freely in either direction; LED diameter,
+spacing, padding, and glow scale together.
+
+Kapps intentionally shades a focused layer while it is being moved or resized.
+With `Open layers transparent` enabled, that editing shade disappears as soon
+as focus returns to iRacing; it is not drawn by ShiftLines.
+
 ## Development
 
 ```powershell
@@ -52,4 +60,3 @@ npm test
 ```
 
 Node.js is only needed for tests, not to run the overlay.
-

@@ -1,5 +1,11 @@
 import { DemoSource } from "./demo-source.js";
-import { computeLights, gearKey, playerCarPath, profileForCar } from "./engine.js";
+import {
+  computeLedGeometry,
+  computeLights,
+  gearKey,
+  playerCarPath,
+  profileForCar,
+} from "./engine.js";
 import { KappsClient } from "./kapps-client.js";
 
 const query = new URLSearchParams(location.search);
@@ -37,7 +43,6 @@ async function loadProfiles() {
 function ensureLedCount(count) {
   if (leds.length === count) return;
   elements.lights.replaceChildren();
-  elements.lights.style.setProperty("--led-count", count);
   leds = Array.from({ length: count }, (_, index) => {
     const led = document.createElement("span");
     led.className = "led";
@@ -45,6 +50,16 @@ function ensureLedCount(count) {
     elements.lights.append(led);
     return led;
   });
+  updateScale();
+}
+
+function updateScale() {
+  const count = Math.max(1, leds.length || 10);
+  const geometry = computeLedGeometry(innerWidth, innerHeight, count);
+
+  elements.lights.style.setProperty("--led-size", `${geometry.diameter}px`);
+  elements.lights.style.setProperty("--led-gap", `${geometry.gap}px`);
+  elements.lights.style.setProperty("--led-padding", `${geometry.padding}px`);
 }
 
 function render(nowMs) {
@@ -92,5 +107,6 @@ source.addEventListener("telemetry", (event) => {
 
 await loadProfiles();
 source.connect();
+new ResizeObserver(updateScale).observe(document.documentElement);
+updateScale();
 requestAnimationFrame(render);
-

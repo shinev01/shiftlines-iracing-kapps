@@ -18,26 +18,33 @@ body {
 }
 
 body {
+  position: relative;
   display: grid;
   place-items: center;
-  padding: 4px;
+  padding: 0;
 }
 
 #overlay {
+  position: relative;
+  display: grid;
+  place-items: center;
   width: 100%;
-  min-width: 170px;
+  height: 100%;
+  overflow: hidden;
   background: transparent !important;
   background-color: transparent !important;
   box-shadow: none !important;
 }
 
 #lights {
-  display: grid;
-  grid-template-columns: repeat(var(--led-count, 10), minmax(8px, 1fr));
+  display: flex;
   align-items: center;
-  gap: clamp(3px, 1.25vw, 10px);
-  width: 100%;
-  padding: clamp(5px, 1.6vw, 12px);
+  justify-content: center;
+  gap: var(--led-gap, 4px);
+  width: max-content;
+  max-width: 100%;
+  max-height: 100%;
+  padding: var(--led-padding, 5px);
   border-radius: 999px;
   background: transparent !important;
   background-color: transparent !important;
@@ -46,8 +53,9 @@ body {
 }
 
 .led {
-  width: 100%;
-  aspect-ratio: 1;
+  width: var(--led-size, 16px);
+  height: var(--led-size, 16px);
+  flex: 0 0 var(--led-size, 16px);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 50%;
   background: rgba(28, 32, 39, 0.78);
@@ -64,6 +72,10 @@ body {
 }
 
 #status {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
   margin-top: 5px;
   color: rgba(255, 255, 255, 0.72);
   font-size: clamp(9px, 2.5vw, 14px);
@@ -77,6 +89,10 @@ body {
 }
 
 #debug {
+  position: absolute;
+  right: 8px;
+  bottom: 0;
+  left: 8px;
   display: flex;
   justify-content: space-between;
   gap: 8px;
