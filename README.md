@@ -8,6 +8,30 @@ car-specific redline blink interval.
 No separate server, SimHub, or terminal window is required. Kapps serves the
 files and supplies live iRacing telemetry through its WebSocket.
 
+## Preview
+
+![ShiftLines overlay synchronized with the car shift lights](assets/shiftlines-demo.gif)
+
+## Supported cars
+
+ShiftLines bundles every iRacing profile currently published by the same Lovely
+Car Data database used by ATSR-Hub EVO: 80 cars across 36 classes.
+
+This includes all 12 published GT3 profiles, both LMP2 profiles (Dallara P217
+and HPD ARX-01C), the Ligier JS P320 LMP3, every GTP, plus GT4, GTE, LMP1, TCR,
+formula, stock car, touring car, and other published iRacing profiles.
+
+Cars added upstream can be checked or imported with:
+
+```powershell
+npm run check:data
+npm run sync:data
+```
+
+The sync script reads the current iRacing manifest directly from
+`Lovely-Sim-Racing/lovely-car-data` and validates every profile before replacing
+the bundled database.
+
 ## Install
 
 1. Run `Install-Kapps-App.cmd` once.
@@ -31,13 +55,13 @@ Open this URL while Kapps is running:
 http://127.0.0.1:8182/ShiftLines/?demo=1&debug=1
 ```
 
-Choose a GTP demo profile with `car=`: `porsche963gtp`, `bmwlmdh`,
-`cadillacvseriesrgtp`, `acuraarx06gtp`, or `ferrari499p`.
+Choose any bundled iRacing `carId` with `car=`. Examples include
+`porsche963gtp`, `ferrari296gt3`, `dallarap217`, and `ligierjsp320`.
 
 Example:
 
 ```text
-http://127.0.0.1:8182/ShiftLines/?demo=1&debug=1&car=bmwlmdh
+http://127.0.0.1:8182/ShiftLines/?demo=1&debug=1&car=ferrari296gt3
 ```
 
 Add `?debug=1` to the live URL to display the detected car, RPM, gear, and data

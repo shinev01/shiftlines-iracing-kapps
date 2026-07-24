@@ -10,6 +10,31 @@ export const REQUEST_PARAMS = [
   "DriverInfo",
 ];
 
+export function applyKappsMessage(state, message) {
+  const data = message.connected ? {} : { ...(state.data || {}) };
+  let connected = Boolean(state.connected);
+  const incoming = message.data && typeof message.data === "object"
+    ? message.data
+    : null;
+
+  if (message.connected) connected = true;
+
+  if (incoming) {
+    Object.assign(data, incoming);
+
+    // When an overlay is opened after iRacing, Kapps can start streaming
+    // telemetry without repeating its one-shot `connected` notification.
+    if (REQUEST_PARAMS.some((key) => Object.prototype.hasOwnProperty.call(incoming, key))) {
+      connected = true;
+    }
+  }
+
+  // An explicit disconnect must win even if the final packet also has data.
+  if (message.disconnected) connected = false;
+
+  return { data, connected };
+}
+
 export class KappsClient extends EventTarget {
   constructor({ host = "127.0.0.1:8182", fps = 60, reconnectMs = 1500 } = {}) {
     super();
@@ -51,15 +76,14 @@ export class KappsClient extends EventTarget {
     } catch {
       return;
     }
-    if (message.connected) {
-      this.data = {};
-      this.iracingConnected = true;
-    }
-    if (message.disconnected) this.iracingConnected = false;
-    if (message.data) Object.assign(this.data, message.data);
+    const next = applyKappsMessage(
+      { data: this.data, connected: this.iracingConnected },
+      message,
+    );
+    this.data = next.data;
+    this.iracingConnected = next.connected;
     this.dispatchEvent(new CustomEvent("telemetry", {
       detail: { data: this.data, connected: this.iracingConnected },
     }));
   }
 }
-

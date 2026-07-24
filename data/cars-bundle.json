@@ -1,6 +1,10 @@
 {
   "version": "1.0",
   "timestamp": 1783203898011,
+  "source": {
+    "repository": "Lovely-Sim-Racing/lovely-car-data",
+    "revision": "da42b2886160aa69593c4ae6b2952b550c0428bf"
+  },
   "cars": {
     "acuraarx06gtp": {
       "carName": "Acura ARX-06 GTP ",

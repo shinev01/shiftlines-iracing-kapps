@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test"
+    "test": "node --test",
+    "check:data": "node scripts/sync-car-data.mjs --check",
+    "sync:data": "node scripts/sync-car-data.mjs --write"
   }
 }
-

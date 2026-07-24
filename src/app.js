@@ -6,7 +6,7 @@ import {
   playerCarPath,
   profileForCar,
 } from "./engine.js";
-import { KappsClient } from "./kapps-client.js";
+import { KappsClient } from "./kapps-client.js?v=5";
 
 const query = new URLSearchParams(location.search);
 const isDemo = query.has("demo");
