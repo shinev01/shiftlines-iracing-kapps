@@ -3,6 +3,12 @@ name: Release Windows installer
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing release tag
+        required: true
+        type: string
 
 permissions:
   contents: write
@@ -19,7 +25,9 @@ jobs:
         id: version
         shell: pwsh
         run: |
-          $version = '${{ github.event.release.tag_name }}'.TrimStart('v')
+          $tag = '${{ github.event.release.tag_name || inputs.tag }}'
+          $version = $tag.TrimStart('v')
+          "tag=$tag" >> $env:GITHUB_OUTPUT
           "value=$version" >> $env:GITHUB_OUTPUT
 
       - name: Build one-click installer
@@ -32,6 +40,6 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release upload '${{ github.event.release.tag_name }}' `
-            'dist\ShiftLines-Setup-${{ github.event.release.tag_name }}.exe' `
+          gh release upload '${{ steps.version.outputs.tag }}' `
+            'dist\ShiftLines-Setup-${{ steps.version.outputs.tag }}.exe' `
             --clobber
