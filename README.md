@@ -1,4 +1,4 @@
-# ShiftLines for Kapps
+# RPM Lights for Kapps
 
 Native Kapps Custom Overlay with car-specific iRacing shift lights. It uses the
 same open Lovely Car Data project referenced by ATSR-Hub EVO: individual RPM
