@@ -34,7 +34,8 @@ the bundled database.
 
 ## Install
 
-1. Run `Install-Kapps-App.cmd` once.
+1. Download `ShiftLines-Setup-v1.1.0.exe` from the latest GitHub Release and
+   run it once. No extraction or terminal is required.
 2. Start Kapps **as administrator** once.
 3. In `App -> Settings -> App Folder`, select `Documents\iRacing\CustomApps` and
    click `Save`.
@@ -46,6 +47,8 @@ the bundled database.
    ```
 
 After Kapps creates its folder link, it can be started normally.
+
+For a manual source checkout installation, run `Install-Kapps-App.cmd`.
 
 ## Test without iRacing
 
@@ -81,6 +84,7 @@ as focus returns to iRacing; it is not drawn by ShiftLines.
 
 ```powershell
 npm test
+.\scripts\Build-Installer.ps1
 ```
 
 Node.js is only needed for tests, not to run the overlay.
