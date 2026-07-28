@@ -10,7 +10,10 @@ files and supplies live iRacing telemetry through its WebSocket.
 
 ## Preview
 
-![ShiftLines overlay synchronized with the car shift lights](assets/shiftlines-demo.gif)
+Ferrari 296 GT3 demo showing the car-specific LED sequence, shift point, and
+redline blink:
+
+![ShiftLines for Kapps accelerating through the Ferrari 296 GT3 shift-light sequence](assets/shiftlines-demo.gif)
 
 ## Supported cars
 
